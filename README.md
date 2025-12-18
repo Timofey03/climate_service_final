@@ -12,19 +12,13 @@
 1. Установите PostgreSQL и создайте БД (например `climate_service`)
 2. Выполните SQL:
    - откройте `table.sql` и выполните в вашей БД
-3. Установите зависимости:
-   ```bash
-   python -m venv .venv
-   .venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-4. Настройте переменные окружения (или поправьте параметры в `Database(...)`):
+3. Настройте переменные окружения (или поправьте параметры в `Database(...)`):
    - `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_PORT`
-5. Импортируйте данные:
+4. Импортируйте данные:
    ```bash
    python import_data.py
    ```
-6. Запустите приложение:
+5. Запустите приложение:
    ```bash
    python main_app.py
    ```
