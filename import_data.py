@@ -1,7 +1,7 @@
 from database_module import Database
 import csv
 
-def import_users_from_csv(db: Database, filename: str):
+def import_users(db: Database, filename: str):
     """Импорт пользователей из CSV файла"""
     try:
         with open(filename, 'r', encoding='utf-8') as file:
@@ -28,7 +28,7 @@ def import_users_from_csv(db: Database, filename: str):
     except Exception as e:
         print(f"❌ Ошибка при импорте пользователей: {e}")
 
-def import_requests_from_csv(db: Database, filename: str):
+def import_requests(db: Database, filename: str):
     """Импорт заявок из CSV файла"""
     try:
         with open(filename, 'r', encoding='utf-8') as file:
@@ -40,9 +40,9 @@ def import_requests_from_csv(db: Database, filename: str):
                 db.cursor.execute('''
                     INSERT INTO requests (
                         start_date, climate_tech_type, climate_tech_model,
-                        problem_description, request_status, due_date, completion_date,
+                        problem_description, request_status, completion_date,
                         repair_parts, master_id, client_id
-                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                     RETURNING request_id
                 ''', (
                     row['startDate'],
@@ -50,10 +50,7 @@ def import_requests_from_csv(db: Database, filename: str):
                     row['climateTechModel'],
                     row['problem_description'],  # Опечатка в исходных данных
                     row['requestStatus'],
-                    # due_date: срок выполнения (если заявка не завершена)
-                    (row['completionDate'] if row['completionDate'] != 'null' and row['requestStatus'] != 'Готова к выдаче' else None),
-                    # completion_date: фактическая дата завершения
-                    (row['completionDate'] if row['completionDate'] != 'null' and row['requestStatus'] == 'Готова к выдаче' else None),
+                    row['completionDate'] if row['completionDate'] != 'null' else None,
                     row['repairParts'] if row['repairParts'] else None,
                     int(row['masterID']) if row['masterID'] != 'null' else None,
                     int(row['clientID'])
@@ -73,7 +70,7 @@ def import_requests_from_csv(db: Database, filename: str):
     except Exception as e:
         print(f"❌ Ошибка при импорте заявок: {e}")
 
-def import_comments_from_csv(db: Database, filename: str):
+def import_comments(db: Database, filename: str):
     """Импорт комментариев из CSV файла"""
     try:
         with open(filename, 'r', encoding='utf-8') as file:
@@ -116,15 +113,15 @@ def main():
     try:
         # Импорт пользователей
         print("\n📥 Импорт пользователей...")
-        import_users_from_csv(db, 'inputDataUsers.txt')
+        import_users(db, 'inputDataUsers.csv')
         
         # Импорт заявок
         print("\n📥 Импорт заявок...")
-        import_requests_from_csv(db, 'inputDataRequests.txt')
+        import_requests(db, 'inputDataRequests.csv')
         
         # Импорт комментариев
         print("\n📥 Импорт комментариев...")
-        import_comments_from_csv(db, 'inputDataComments.txt')
+        import_comments(db, 'inputDataComments.csv')
         
         print("\n" + "="*60)
         print("✅ ИМПОРТ УСПЕШНО ЗАВЕРШЁН!")

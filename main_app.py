@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, QDate
 from PyQt6.QtGui import QFont, QIcon
-from database_module_updated import Database
+from database_module import Database
 from qr_generator import QRCodeDialog
 
 
@@ -39,61 +39,61 @@ class LoginWindow(QDialog):
 
         self.setStyleSheet("""
             QDialog {
-                background-color: #f5f5f5;
+                background-color: #FFFFFF; /* White background */
             }
             QLabel {
                 font-size: 14px;
-                color: #333;
+                color: #2C3E50; /* Dark Blue text */
                 font-weight: bold;
             }
             QLineEdit {
                 padding: 10px;
-                border: 2px solid #ddd;
+                border: 1px solid #BDC3C7;
                 border-radius: 5px;
                 font-size: 14px;
-                background-color: white;
-                color: black;
+                background-color: #FFFFFF;
+                color: #2C3E50;
             }
             QLineEdit:focus {
-                border: 2px solid #4CAF50;
+                border: 1px solid #3498DB; /* Bright Blue accent */
             }
             QPushButton#EyeBtn {
-                background-color: white;
-                border: 2px solid #ddd;
+                background-color: #FFFFFF;
+                border: 1px solid #BDC3C7;
                 border-radius: 5px;
                 font-size: 16px;
                 padding: 0px;
                 min-width: 40px;
             }
             QPushButton#EyeBtn:hover {
-                background-color: #e0e0e0;
+                background-color: #ECF0F1;
             }
             QPushButton#LoginBtn {
                 min-height: 50px;
-                background-color: #4CAF50;
+                background-color: #3498DB; /* Bright Blue */
                 color: white;
-                border: 1px solid #3d8b40;
+                border: none;
                 border-radius: 5px;
                 font-size: 16px;
                 font-weight: bold;
             }
             QPushButton#LoginBtn:hover {
-                background-color: #45a049;
+                background-color: #2980B9;
             }
             QPushButton#LoginBtn:pressed {
-                background-color: #3d8b40;
+                background-color: #2471A3;
             }
             QPushButton#RegBtn {
                 min-height: 50px;
-                background-color: #2196F3;
-                border: 1px solid #0b7dda;
+                background-color: #2C3E50; /* Dark Blue */
+                border: none;
                 color: white;
                 border-radius: 5px;
                 font-size: 16px;
                 font-weight: bold;
             }
             QPushButton#RegBtn:hover {
-                background-color: #0b7dda;
+                background-color: #34495E;
             }
         """)
 
@@ -105,7 +105,7 @@ class LoginWindow(QDialog):
         title = QLabel('Вход в систему')
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         title.setFont(QFont('Arial', 18, QFont.Weight.Bold))
-        title.setStyleSheet("color: #4CAF50; margin-bottom: 10px;")
+        title.setStyleSheet("color: #3498DB; margin-bottom: 10px;")
         layout.addWidget(title)
 
         # Поле логина
@@ -219,10 +219,10 @@ class RegisterDialog(QDialog):
         self.setStyleSheet("""
             QLineEdit {
                 padding: 5px;
-                border: 1px solid #ccc;
+                border: 1px solid #BDC3C7;
                 border-radius: 3px;
-                color: black;
-                background-color: white;
+                color: #2C3E50;
+                background-color: #FFFFFF;
             }
         """)
 
@@ -335,7 +335,7 @@ class MainWindow(QMainWindow):
         header = QLabel(f'Пользователь: {self.current_user["fio"]} | Роль: {role_display}')
         header.setStyleSheet("""
             QLabel {
-                background-color: #4CAF50;
+                background-color: #2C3E50; /* Dark Blue */
                 color: white;
                 padding: 15px;
                 font-size: 16px;
@@ -362,7 +362,7 @@ class MainWindow(QMainWindow):
         logout_btn.clicked.connect(self.logout)
 
         header_widget = QWidget()
-        header_widget.setStyleSheet("background-color: #4CAF50;")
+        header_widget.setStyleSheet("background-color: #2C3E50;")
         header_inner_layout = QHBoxLayout()
         header_inner_layout.setContentsMargins(0, 0, 10, 0)
         header_inner_layout.addWidget(header)
@@ -376,16 +376,22 @@ class MainWindow(QMainWindow):
         self.tabs = QTabWidget()
         self.tabs.setStyleSheet("""
             QTabWidget::pane {
-                border: 1px solid #ddd;
-                background-color: white;
+                border-top: 2px solid #3498DB;
+                background-color: #FFFFFF;
             }
             QTabBar::tab {
-                padding: 10px 20px;
-                font-size: 14px;
+                background: #ECF0F1;
+                border: 1px solid #BDC3C7;
+                border-bottom-color: #3498DB; 
+                padding: 10px 25px;
+                font-weight: bold;
+                color: #7F8C8D;
             }
             QTabBar::tab:selected {
-                background-color: #4CAF50;
-                color: white;
+                background: #FFFFFF;
+                border-color: #3498DB;
+                border-bottom-color: #FFFFFF; 
+                color: #2C3E50;
             }
         """)
 
@@ -437,7 +443,7 @@ class MainWindow(QMainWindow):
 
         # Заголовок
         title = QLabel('Управление пользователями')
-        title.setStyleSheet("font-size: 18px; font-weight: bold; padding: 10px; color: black;")
+        title.setStyleSheet("font-size: 18px; font-weight: bold; padding: 10px; color: #2C3E50;")
         layout.addWidget(title)
 
         # Кнопка обновления
@@ -570,7 +576,7 @@ class MainWindow(QMainWindow):
         search_label = QLabel('Поиск:')
         self.search_input = QLineEdit()
         self.search_input.setPlaceholderText('Введите запрос для поиска...')
-        self.search_input.setStyleSheet("color: black; background-color: white;")
+        self.search_input.setStyleSheet("color: #2C3E50; background-color: #FFFFFF;")
         search_btn = QPushButton('Найти')
         search_btn.clicked.connect(self.search_requests)
 
@@ -707,7 +713,7 @@ class MainWindow(QMainWindow):
 
         # Заголовок
         title = QLabel('Статистика и аналитика')
-        title.setStyleSheet("font-size: 18px; font-weight: bold; padding: 10px; color: black;")
+        title.setStyleSheet("font-size: 18px; font-weight: bold; padding: 10px; color: #2C3E50;")
         layout.addWidget(title)
 
         # Кнопка обновления статистики
@@ -740,7 +746,7 @@ class MainWindow(QMainWindow):
                 font-size: 14px;
                 padding: 15px;
                 background-color: #f9f9f9;
-                color: black;
+                color: #ECF0F1;
                 border: 1px solid #ddd;
             }
         """)
@@ -767,7 +773,7 @@ class MainWindow(QMainWindow):
         self.link_input = QLineEdit(
             'https://docs.google.com/forms/d/e/1FAIpQLSdhZcExx6LSIXxk0ub55mSu-WIh23WYdGG9HY5EZhLDo7P8eA/viewform?usp=sf_link'
         )
-        self.link_input.setStyleSheet("color: black; background-color: white;")
+        self.link_input.setStyleSheet("color: #ECF0F1; background-color: #34495E;")
         layout.addWidget(link_label)
         layout.addWidget(self.link_input)
 
@@ -861,23 +867,23 @@ class MainWindow(QMainWindow):
         stats = self.db.get_statistics()
 
         text = f"""
-        <div style="color: black;">
+        <div style="color: #ECF0F1;">
             <h2 style="color: #4CAF50;">Общая статистика</h2>
 
-            <p style="color: black;"><b>Всего заявок:</b> {stats.get('total_requests', 0)}</p>
-            <p style="color: black;"><b>Завершённых заявок:</b> {stats.get('completed_requests', 0)}</p>
-            <p style="color: black;"><b>Среднее время выполнения:</b> {stats.get('avg_completion_time', 0):.1f} дней</p>
+            <p style="color: #ECF0F1;"><b>Всего заявок:</b> {stats.get('total_requests', 0)}</p>
+            <p style="color: #ECF0F1;"><b>Завершённых заявок:</b> {stats.get('completed_requests', 0)}</p>
+            <p style="color: #ECF0F1;"><b>Среднее время выполнения:</b> {stats.get('avg_completion_time', 0):.1f} дней</p>
 
             <h3 style="color: #2196F3;">Статистика по типам оборудования:</h3>
         """
 
         for item in stats.get('by_tech_type', []):
-            text += f"<p style='color: black;'>- {item['type']}: <b>{item['count']}</b> заявок</p>"
+            text += f"<p style='color: #ECF0F1;'>- {item['type']}: <b>{item['count']}</b> заявок</p>"
 
         text += "<h3 style='color: #FF9800;'>Статистика по статусам:</h3>"
 
         for item in stats.get('by_status', []):
-            text += f"<p style='color: black;'>- {item['status']}: <b>{item['count']}</b> заявок</p>"
+            text += f"<p style='color: #ECF0F1;'>- {item['status']}: <b>{item['count']}</b> заявок</p>"
 
         text += "</div>"
 
@@ -889,7 +895,7 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout()
 
         title = QLabel('Доступные заявки (без назначенного специалиста)')
-        title.setStyleSheet("font-size: 18px; font-weight: bold; padding: 10px; color: black;")
+        title.setStyleSheet("font-size: 18px; font-weight: bold; padding: 10px; color: #2C3E50;")
         layout.addWidget(title)
 
         refresh_btn = QPushButton('Обновить')
@@ -910,16 +916,16 @@ class MainWindow(QMainWindow):
         # Кнопка "Откликнуться на заявку"
         respond_btn = QPushButton('Откликнуться на заявку')
         respond_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #4CAF50;
+            QHeaderView::section {
+                background-color: #2C3E50; /* Dark Blue */
                 color: white;
-                padding: 15px;
-                font-size: 16px;
+                padding: 5px;
+                border: 1px solid #2C3E50;
                 font-weight: bold;
-                border-radius: 5px;
+            }5px;
             }
             QPushButton:hover {
-                background-color: #45a049;
+                background-color: #2980B9;
             }
         """)
         respond_btn.clicked.connect(self.respond_to_request)
@@ -1007,12 +1013,12 @@ class AddRequestDialog(QDialog):
 
         self.model_input = QLineEdit()
         self.model_input.setPlaceholderText('Например: Samsung AR09')
-        self.model_input.setStyleSheet("color: black; background-color: white;")
+        self.model_input.setStyleSheet("color: #ECF0F1; background-color: #34495E;")
 
         self.problem_input = QTextEdit()
         self.problem_input.setPlaceholderText('Опишите проблему подробно...')
         self.problem_input.setMaximumHeight(150)
-        self.problem_input.setStyleSheet("color: black; background-color: white;")
+        self.problem_input.setStyleSheet("color: #ECF0F1; background-color: #34495E;")
 
         layout.addRow('Тип оборудования:', self.tech_type_combo)
         layout.addRow('Модель:', self.model_input)
@@ -1099,7 +1105,7 @@ class RequestDetailsDialog(QDialog):
         self.problem_text = QTextEdit()
         self.problem_text.setPlainText(request_data.get('problem_description', ''))
         self.problem_text.setReadOnly(True)
-        self.problem_text.setStyleSheet("color: black; background-color: #f0f0f0;")
+        self.problem_text.setStyleSheet("color: #ECF0F1; background-color: #f0f0f0;")
 
         self.status_combo = QComboBox()
         self.status_combo.addItems([
@@ -1115,36 +1121,10 @@ class RequestDetailsDialog(QDialog):
         layout.addRow('Описание:', self.problem_text)
         layout.addRow('Статус:', self.status_combo)
 
-        # Срок выполнения (due_date) — доступен для просмотра всем, редактирование для менеджера по качеству
-        self.due_date_edit = QDateEdit()
-        self.due_date_edit.setCalendarPopup(True)
-        due_date = request_data.get('due_date')
-        if due_date:
-            # due_date может прийти как date/datetime или строка
-            try:
-                if hasattr(due_date, 'year'):
-                    self.due_date_edit.setDate(QDate(due_date.year, due_date.month, due_date.day))
-                else:
-                    y, m, d = [int(x) for x in str(due_date).split('-')]
-                    self.due_date_edit.setDate(QDate(y, m, d))
-            except Exception:
-                self.due_date_edit.setDate(QDate.currentDate())
-        else:
-            self.due_date_edit.setDate(QDate.currentDate())
-
-        self.due_confirm = QComboBox()
-        self.due_confirm.addItems(['Согласование заказчика: НЕТ', 'Согласование заказчика: ДА'])
-
-        # Редактирование срока — только «Менеджер по качеству» и админ
-        can_edit_due = self.is_admin or self.current_user['user_type'] == 'Менеджер по качеству'
-        self.due_date_edit.setEnabled(can_edit_due)
-        self.due_confirm.setEnabled(can_edit_due)
-
-
         client_label = QLabel(request_data.get('client_name', 'Не указан'))
         layout.addRow('Клиент:', client_label)
         
-        can_assign_master = self.is_admin or self.current_user['user_type'] in ['Менеджер', 'Оператор', 'Менеджер по качеству']
+        can_assign_master = self.is_admin or self.current_user['user_type'] in ['Менеджер', 'Оператор']
         
         if can_assign_master:
             self.master_combo = QComboBox()
@@ -1187,7 +1167,7 @@ class RequestDetailsDialog(QDialog):
         """Сохранение изменений"""
         new_status = self.status_combo.currentText()
         
-        can_assign_master = self.is_admin or self.current_user['user_type'] in ['Менеджер', 'Оператор', 'Менеджер по качеству']
+        can_assign_master = self.is_admin or self.current_user['user_type'] in ['Менеджер', 'Оператор']
         
         try:
             # Сначала назначаем мастера (до изменения статуса!)
@@ -1203,17 +1183,6 @@ class RequestDetailsDialog(QDialog):
                             'Возможно, заявка уже завершена.'
                         )
             
-            # Продление/изменение срока выполнения (только менеджер по качеству/админ)
-            can_edit_due = self.is_admin or self.current_user['user_type'] == 'Менеджер по качеству'
-            if can_edit_due and hasattr(self, 'due_date_edit'):
-                if self.due_confirm.currentText().endswith('ДА'):
-                    qd = self.due_date_edit.date()
-                    new_due = f"{qd.year():04d}-{qd.month():02d}-{qd.day():02d}"
-                    self.db.update_due_date(self.request_id, new_due)
-                else:
-                    # если нет согласования, срок не меняем
-                    pass
-
             # Потом обновляем статус
             self.db.update_request_status(self.request_id, new_status)
             
